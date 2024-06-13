@@ -4,18 +4,18 @@ pipeline {
         stage ('clean') {
             steps {
                 cleanWs()
+                git url: 'https://github.com/agray998/jenkins-freestyle-project', branch: 'main'
             }
         }
-        stage ('Run Script') {
+        stage ('Run script') {
             steps {
                 sh "sh run.sh"
             }
         }
-        stage ('Generate Artifacts') {
+        stage ('Generate artifacts') {
             steps {
                 sh '''
-                #!/bin/bash
-                for i in {1..5}; do echo "This is file \$i" > file\$i.txt; done
+                bash stage-2.sh
                 '''
             }
         }
